@@ -63,3 +63,15 @@ a {
         /* الأنماط الأخرى التي ترغب في تعديلها للشاشات الصغيرة */
     }
 }
+
+.text-algin{
+    margin-top: 4vw;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    background-color: rgb(255, 255, 255);
+    padding: 2vw;  
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    text-align: center ;
+    line-height: 1.8;
+}
