@@ -56,7 +56,8 @@ a {
 
 @media (max-width: 600px) {
     .buttons, .footer, .text {
-        margin:6vw;
+        margin-left: 4vw;
+        margin-right: 4vw;
     padding: 5vw;
         
         /* الأنماط الأخرى التي ترغب في تعديلها للشاشات الصغيرة */
