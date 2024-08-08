@@ -24,22 +24,38 @@
 
     <script>
         const messages = document.getElementById('messages');
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbx1r18IlUUr5K8coUMNr3zIwgb0BLFDXJu04xNNYQ_ZOvy9YAjElZgX3T6d8Rl1Zu99/exec';
 
-        function sendMessage() {
+        async function fetchMessages() {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            messages.innerHTML = '';
+            data.forEach(message => {
+                const messageElement = document.createElement('div');
+                messageElement.textContent = message.message;
+                messages.appendChild(messageElement);
+            });
+        }
+
+        async function sendMessage() {
             const messageInput = document.getElementById('messageInput');
             const messageText = messageInput.value;
 
             if (messageText.trim() !== '') {
-                const messageElement = document.createElement('div');
-                messageElement.textContent = messageText;
-                messages.appendChild(messageElement);
+                await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: messageText })
+                });
                 messageInput.value = '';
+                fetchMessages();
             }
         }
 
-        window.onbeforeunload = function () {
-            messages.innerHTML = ''; // مسح الرسائل عند إغلاق الصفحة
-        };
+        fetchMessages(); // تحميل الرسائل عند فتح الصفحة
+        setInterval(fetchMessages, 5000); // تحديث الرسائل كل 5 ثواني
     </script>
 </body>
 </html>
